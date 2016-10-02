@@ -16,7 +16,7 @@ ActiveRecord::Schema.define(version: 20161002025151) do
   enable_extension "plpgsql"
 
   create_table "quotes", force: :cascade do |t|
-    t.boolean "boolean", default: true
+    t.boolean "validated", default: true
     t.text    "text_en"
     t.text    "text_es"
     t.string  "source"
