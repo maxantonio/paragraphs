@@ -24,17 +24,28 @@ class QuotesController < ApplicationController
   # POST /quotes
   # POST /quotes.json
   def create
-    @quote = Quote.new(quote_params)
 
-    respond_to do |format|
-      if @quote.save
-        format.html { redirect_to @quote, notice: 'Quote was successfully created.' }
-        format.json { render :show, status: :created, location: @quote }
-      else
-        format.html { render :new }
-        format.json { render json: @quote.errors, status: :unprocessable_entity }
-      end
+    @quote = params[:quote]
+    @quote_create = Quote.new
+    # @quote = params["quote"]["text_es"]
+    x=0
+    @quote.each_value do |quote|
+      # @quote_create.text_en = quote[x]
+      # @quote_create.text_es = quote[x]
+      # @quote_create.save
+      @quote_create = Quote.create(:text_en => quote,:text_es => quote)
+      x+=1
     end
+    @quote_create.save
+    # respond_to do |format|
+    #   if @quote.save
+    #     format.html { redirect_to @quote, notice: 'Quote was successfully created.' }
+    #     format.json { render :show, status: :created, location: @quote }
+    #   else
+    #     format.html { render :new }
+    #     format.json { render json: @quote.errors, status: :unprocessable_entity }
+    #   end
+    # end
   end
 
   # PATCH/PUT /quotes/1
@@ -69,6 +80,6 @@ class QuotesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def quote_params
-      params[:quote].permit(:text_en,:text_es)
+      params[:quote].permit(:quote)
     end
 end

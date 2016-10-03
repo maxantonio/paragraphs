@@ -10,14 +10,19 @@
       </ul>
     </div>
   <% end %>
-    <div class="field">
-      <%= f.label :text_en %><br>
-      <%= f.text_area :text_en %>
+
+      <div class="field">
+        <div class="input_fields_wrap">
+        <button class="add_field_button">Add More Fields</button>
+          <div class="field">
+            <label for="quote_text_en">Text en</label><br>
+            <textarea name="quote[text_en][]" id="quote_text_en"></textarea><br>
+            <label for="quote_text_es">Text es</label><br>
+            <textarea name="quote[text_es][]" id="quote_text_es"></textarea>
+          </div>
+      </div>
     </div>
-    <div class="field">
-      <%= f.label :text_es %><br>
-      <%= f.text_area :text_es %>
-    </div>
+
   <div class="actions">
     <%= f.submit %>
   </div>
