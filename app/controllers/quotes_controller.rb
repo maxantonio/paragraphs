@@ -24,17 +24,13 @@ class QuotesController < ApplicationController
   # POST /quotes
   # POST /quotes.json
   def create
-
     @quote = params[:quote]
     @quote_create = Quote.new
-    # @quote = params["quote"]["text_es"]
+
     @qtext_en= @quote["text_en"]
     @qtext_es= @quote["text_es"]
     x=0
     (0...@quote.length).each do
-      # @quote_create.text_en = quote[x]
-      # @quote_create.text_es = quote[x]
-      # @quote_create.save
       @quote_create = Quote.create(:text_en => @qtext_en[x],:text_es => @qtext_es[x])
       x+=1
     end
