@@ -24,24 +24,24 @@ class QuotesController < ApplicationController
   # POST /quotes
   # POST /quotes.json
   def create
-    @quote = params[:quote]
-    @quote_create = Quote.new
+    @quote_create = params[:quote]
+    @quote = Quote.new
+    @qtext_en= @quote_create["text_en"]
+    @qtext_es= @quote_create["text_es"]
 
-    @qtext_en= @quote["text_en"]
-    @qtext_es= @quote["text_es"]
     x=0
-    (0...@quote.length).each do
-      @quote_create = Quote.create(:text_en => @qtext_en[x],:text_es => @qtext_es[x])
+    (0...@quote_create.length).each do
+      @quote = Quote.create(:text_en => @qtext_en[x],:text_es => @qtext_es[x])
       x+=1
     end
 
     respond_to do |format|
-      if @quote_create.save
-        format.html { redirect_to @quote_create, notice: 'Quote was successfully created.' }
-        format.json { render :show, status: :created, location: @quote_create }
+      if @quote.save
+        format.html { redirect_to @quote, notice: 'Quote was successfully created.' }
+        format.json { render :show, status: :created, location: @quote }
       else
         format.html { render :new }
-        format.json { render json: @quote_create.errors, status: :unprocessable_entity }
+        format.json { render json: @quote.errors, status: :unprocessable_entity }
       end
     end
   end
